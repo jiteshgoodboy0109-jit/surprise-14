@@ -109,9 +109,16 @@ document.addEventListener('click', (e) => {
 // --- Core Functions ---
 
 function init() {
-    renderScene();
-    updateProgress();
-    lucide.createIcons();
+    console.log("Initializing App...");
+    try {
+        renderScene();
+        updateProgress();
+        if (window.lucide) {
+            lucide.createIcons();
+        }
+    } catch (error) {
+        console.error("Initialization Error:", error);
+    }
 }
 
 function nextScene() {
@@ -119,6 +126,7 @@ function nextScene() {
         scene++;
         renderScene();
         updateProgress();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 }
 
@@ -134,8 +142,10 @@ function updateProgress() {
     `).join('');
 }
 
-function typeWriter(text, elementId, onComplete, speed = 30) {
-    const element = document.getElementById(elementId);
+function typeWriter(text, element, onComplete, speed = 30) {
+    if (typeof element === 'string') {
+        element = document.getElementById(element);
+    }
     if (!element) return;
 
     element.innerHTML = "";
@@ -249,136 +259,154 @@ function createCelebration() {
 // --- Render Logic ---
 
 function renderScene() {
-    const container = document.getElementById('main-container');
-    const content = document.getElementById('content');
+    console.log(`Rendering Scene ${scene}...`);
+    try {
+        const container = document.getElementById('main-container');
+        const content = document.getElementById('content');
 
-    // 1. Set Background
-    container.className = `w-full h-screen relative flex flex-col items-center justify-center transition-all duration-1000 ${scenes[scene].bg}`;
+        if (!container || !content) {
+            console.error("Critical elements missing!");
+            return;
+        }
 
-    // 2. Set Background Effects
-    clearBackground();
+        // 1. Set Background
+        container.className = `w-full h-screen relative flex flex-col items-center justify-center transition-all duration-1000 ${scenes[scene].bg}`;
 
-    if (scene <= 3) createFloatingLove();
-    if (scene === 4) createFireflies();
-    // Scene 5 (Video) no bg effects
-    // Scene 6 removed
+        // 2. Set Background Effects
+        clearBackground();
 
-    // 3. Render HTML Content from Templates
-    const templateId = `scene-${scene}-template`;
-    const template = document.getElementById(templateId);
+        if (scene <= 3) createFloatingLove();
+        if (scene === 4) createFireflies();
+        // Scene 5 (Video) no bg effects
+        // Scene 6 removed
 
-    if (template) {
-        content.innerHTML = template.innerHTML;
-    } else {
-        content.innerHTML = `<div class="text-white">Scene ${scene} content missing</div>`;
-    }
+        // 3. Render HTML Content from Templates
+        const templateId = `scene-${scene}-template`;
+        const template = document.getElementById(templateId);
 
-    // 4. Dynamic Logic per Scene
-    switch (scene) {
-        case 0: // Intro
-            // Inject Image from Source Div
-            const source0 = document.getElementById('source-image-0');
-            const img0 = document.getElementById('intro-img-0');
-            if (source0 && img0) {
-                const url = source0.innerText.trim();
-                if (url) img0.src = url;
-            }
+        if (template) {
+            content.innerHTML = template.innerHTML;
+        } else {
+            content.innerHTML = `<div class="text-white">Scene ${scene} content missing</div>`;
+        }
 
-            const text0Element = document.getElementById('source-text-0');
-            if (text0Element) {
-                const text0 = text0Element.innerText;
-                typeWriter(text0, "type-text-0", () => {
-                    const btnContainer = document.getElementById('action-buttons-0');
-                    if (btnContainer) {
-                        btnContainer.classList.remove('hidden');
-                        btnContainer.classList.add('flex');
-                    }
-                });
-            }
-            break;
-
-        case 1: // Sunrise
-            const text1Element = document.getElementById('source-text-1');
-            if (text1Element) {
-                const text1 = text1Element.innerText;
-                typeWriter(text1, "type-text-1", () => {
-                    const nextBtn = document.getElementById('next-btn-1');
-                    if (nextBtn) nextBtn.classList.remove('hidden');
-                });
-            }
-            break;
-
-        case 2: // Memories
-            // Inject Images from Source Divs
-            ['1', '2', '3'].forEach(id => {
-                const source = document.getElementById(`source-image-${id}`);
-                const img = document.getElementById(`memory-img-${id}`);
-                if (source && img) {
-                    const url = source.innerText.trim();
-                    if (url) img.src = url;
+        // 4. Dynamic Logic per Scene
+        switch (scene) {
+            case 0: // Intro
+                // Inject Image from Source Div
+                const source0 = template.querySelector('#source-image-0');
+                const img0 = content.querySelector('#intro-img-0');
+                if (source0 && img0) {
+                    const url = source0.innerText.trim();
+                    if (url) img0.src = url;
                 }
-            });
-            break;
 
-        case 3: // Letter
-            const text3Element = document.getElementById('source-text-3');
-            if (text3Element) {
-                const text3 = text3Element.innerText;
-                typeWriter(text3, "type-text-3", () => {
-                    const nextBtn = document.getElementById('next-btn-3');
-                    const downloadBtn = document.getElementById('download-btn-3');
-                    if (nextBtn) nextBtn.classList.remove('hidden');
-                    if (downloadBtn) downloadBtn.classList.remove('hidden');
-                });
-            }
-            break;
+                const text0Element = template.querySelector('#source-text-0');
+                if (text0Element) {
+                    const text0 = text0Element.innerText;
+                    typeWriter(text0, content.querySelector("#type-text-0"), () => {
+                        const btnContainer = content.querySelector('#action-buttons-0');
+                        if (btnContainer) {
+                            btnContainer.classList.remove('hidden');
+                            btnContainer.classList.add('flex');
+                        }
+                    });
+                }
+                break;
 
-        case 4: // Waiting
-            const text4Element = document.getElementById('source-text-4');
-            if (text4Element) {
-                const text4 = text4Element.innerText;
-                typeWriter(text4, "type-text-4", () => {
-                    const nextBtn = document.getElementById('next-btn-4');
-                    if (nextBtn) nextBtn.classList.remove('hidden');
-                });
-            }
-            break;
+            case 1: // Sunrise
+                const text1Element = template.querySelector('#source-text-1');
+                if (text1Element) {
+                    const text1 = text1Element.innerText;
+                    typeWriter(text1, content.querySelector("#type-text-1"), () => {
+                        const nextBtn = content.querySelector('#next-btn-1');
+                        if (nextBtn) nextBtn.classList.remove('hidden');
+                    });
+                }
+                break;
 
-        case 5: // Proposal (Video)
-            renderProposalButtons(); // Prepare buttons but keep hidden
-            const video = document.getElementById('proposal-video');
-            const card = document.getElementById('proposal-card');
-
-            // Inject Text from Source Divs
-            const titleSource = document.getElementById('source-text-5-title');
-            const questionSource = document.getElementById('source-text-5-question');
-
-            if (titleSource) {
-                document.getElementById('final-proposal-title').innerText = titleSource.innerText.trim();
-            }
-            if (questionSource) {
-                document.getElementById('final-proposal-question').innerText = questionSource.innerText.trim();
-            }
-
-            if (video) {
-                video.style.pointerEvents = 'none';
-                video.play().catch(e => console.log("Autoplay blocked, waiting for interaction", e));
-
-                video.onended = () => {
-                    if (card) {
-                        card.classList.remove('hidden');
-                        setTimeout(() => {
-                            card.classList.remove('scale-0');
-                            card.classList.add('scale-100');
-                        }, 100);
-                        createRosePetalRain(); // Add effect when card appears
+            case 2: // Memories
+                // Inject Images from Source Divs
+                ['1', '2', '3'].forEach(id => {
+                    const source = template.querySelector(`#source-image-${id}`);
+                    const img = content.querySelector(`#memory-img-${id}`);
+                    if (source && img) {
+                        const url = source.innerText.trim();
+                        if (url) img.src = url;
                     }
-                };
-            }
-            break;
+                });
+                break;
+
+            case 3: // Letter
+                const text3Element = template.querySelector('#source-text-3');
+                if (text3Element) {
+                    const text3 = text3Element.innerText;
+                    typeWriter(text3, content.querySelector("#type-text-3"), () => {
+                        const nextBtn = content.querySelector('#next-btn-3');
+                        const downloadBtn = content.querySelector('#download-btn-3');
+                        if (nextBtn) nextBtn.classList.remove('hidden');
+                        if (downloadBtn) downloadBtn.classList.remove('hidden');
+                    });
+                }
+                break;
+
+            case 4: // Waiting
+                const text4Element = template.querySelector('#source-text-4');
+                if (text4Element) {
+                    const text4 = text4Element.innerText;
+                    typeWriter(text4, content.querySelector("#type-text-4"), () => {
+                        const nextBtn = content.querySelector('#next-btn-4');
+                        if (nextBtn) nextBtn.classList.remove('hidden');
+                    });
+                }
+                break;
+
+            case 5: // Proposal (Video)
+                renderProposalButtons(); // Prepare buttons but keep hidden
+                const video = content.querySelector('#proposal-video');
+                const card = content.querySelector('#proposal-card');
+
+                // Inject Text from Source Divs
+                const titleSource = template.querySelector('#source-text-5-title');
+                const questionSource = template.querySelector('#source-text-5-question');
+
+                if (titleSource) {
+                    content.querySelector('#final-proposal-title').innerText = titleSource.innerText.trim();
+                }
+                if (questionSource) {
+                    content.querySelector('#final-proposal-question').innerText = questionSource.innerText.trim();
+                }
+
+                if (video) {
+                    video.style.pointerEvents = 'none';
+                    video.play().catch(e => console.log("Autoplay blocked, waiting for interaction", e));
+
+                    video.onended = () => {
+                        if (card) {
+                            card.classList.remove('hidden');
+                            setTimeout(() => {
+                                card.classList.remove('scale-0');
+                                card.classList.add('scale-100');
+                            }, 100);
+                            createRosePetalRain(); // Add effect when card appears
+                        }
+                    };
+                }
+                break;
+        }
+
+    } catch (error) {
+        console.error("Render Scene Error:", error);
+        content.innerHTML = `<div class="text-white p-10 text-center">
+            <p class="text-2xl mb-4">Oops! Something went wrong. 💫</p>
+            <p class="text-sm opacity-70">${error.message}</p>
+            <button onclick="location.reload()" class="mt-6 px-4 py-2 bg-white/20 rounded-full">Try Again</button>
+        </div>`;
     }
 
-    lucide.createIcons();
+    if (window.lucide) {
+        lucide.createIcons();
+    }
 }
 
 function renderProposalButtons() {
@@ -426,4 +454,10 @@ function renderProposalButtons() {
     container.innerHTML = html;
 }
 
-window.onload = init;
+// --- Initialization ---
+
+if (document.readyState === 'loading') {
+    window.addEventListener('load', init);
+} else {
+    init();
+}
