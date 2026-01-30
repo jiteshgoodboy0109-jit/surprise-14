@@ -83,10 +83,17 @@
         <div id="scene-0-template">
             <div class="flex flex-col items-center justify-center text-center px-6 z-10">
                 <div
-                    class="animate-pulse-glow bg-white p-1 rounded-full mb-6 shadow-2xl w-32 h-32 overflow-hidden flex items-center justify-center border-4 border-white">
-                    <img id="intro-img-0" src="assets/1.jpeg"
-                        onerror="this.src='https://api.dicebear.com/9.x/avataaars/svg?seed=Love&hair=long&clothing=graphicShirt&eyes=happy&mouth=smile&skinColor=light'"
-                        class="w-full h-full object-cover rounded-full">
+                    class="animate-premium-heart bg-white/10 p-4 rounded-full mb-8 shadow-[0_0_30px_rgba(255,255,255,0.4)] border-2 border-white/50 backdrop-blur-sm pointer-events-none">
+                    <svg viewBox="0 0 24 24" class="w-24 h-24">
+                        <defs>
+                            <linearGradient id="heartGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#f43f5e;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#fb7185;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <path fill="url(#heartGrad)"
+                            d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                    </svg>
                 </div>
 
                 <h1 id="type-text-0"
@@ -104,7 +111,7 @@
                     </button>
                 </div>
             </div>
-            <div id="source-text-0" style="display:none;">Hey Beautie...
+            <div id="source-text-0" style="display:none;">Hey Beautie... ❤️
                 You live in my mind,
                 but not in my life. 💖</div>
         </div>
@@ -183,7 +190,7 @@
                                 data-lucide="paperclip"></i></div>
                         <div
                             class="bg-purple-100 h-40 w-full flex items-center justify-center mb-2 rounded-sm relative overflow-hidden">
-                            <img id="memory-img-3" src="assets/1.jpeg"
+                            <img id="memory-img-3" src="assets/5.jpeg"
                                 onerror="this.src='https://api.dicebear.com/9.x/avataaars/svg?seed=Love3'"
                                 class="object-cover w-full h-full">
                         </div>
