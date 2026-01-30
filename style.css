@@ -318,7 +318,7 @@
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border: 1px solid rgba(255, 255, 255, 0.4);
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
 }
 
 /* Specific Glow for Proposal Card */
@@ -370,4 +370,55 @@
 /* Hidden templates container */
 #scene-templates {
     display: none;
+}
+
+/* Specific styling to fix letter alignment */
+.letter-scroll {
+    scrollbar-gutter: stable;
+}
+
+#letter-content-area {
+    /* Ensure the ruler lines start exactly at the text baseline */
+    background-attachment: local;
+    line-height: var(--line-height, 2em);
+    padding: 3rem 2rem;
+}
+
+:root {
+    --line-height: 2em;
+}
+
+/* Intro specific adjustments */
+#type-text-0 {
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 640px) {
+    :root {
+        --line-height: 2.2rem;
+    }
+
+    #letter-content-area {
+        padding: 2rem 1.25rem;
+        background-size: 100% var(--line-height);
+    }
+
+    #type-text-3 {
+        line-height: var(--line-height);
+        font-size: 1.25rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    :root {
+        --line-height: 2.5rem;
+    }
+
+    #letter-content-area {
+        background-size: 100% var(--line-height);
+    }
+
+    #type-text-3 {
+        line-height: var(--line-height);
+    }
 }

@@ -276,6 +276,14 @@ function renderScene() {
     // 4. Dynamic Logic per Scene
     switch (scene) {
         case 0: // Intro
+            // Inject Image from Source Div
+            const source0 = document.getElementById('source-image-0');
+            const img0 = document.getElementById('intro-img-0');
+            if (source0 && img0) {
+                const url = source0.innerText.trim();
+                if (url) img0.src = url;
+            }
+
             const text0Element = document.getElementById('source-text-0');
             if (text0Element) {
                 const text0 = text0Element.innerText;
@@ -377,14 +385,27 @@ function renderProposalButtons() {
     const container = document.getElementById('proposal-buttons');
     if (!container) return;
 
-    let noBtnText = "No...";
-    if (noCount === 1) noBtnText = "Wait, really? 🥺";
-    if (noCount === 2) noBtnText = "Please don't... 😢";
-    if (noCount === 3) noBtnText = "Breaks my heart... 💔";
+    // Helper to get text from source divs
+    const getTxt = (id, fallback) => {
+        const el = document.getElementById(id);
+        return el ? el.innerText.trim() : fallback;
+    };
+
+    const yesText = getTxt('source-text-5-yes', 'YES, I Will! 💖');
+    const noBase = getTxt('source-text-5-no', 'No...');
+    const waNumber = getTxt('source-text-5-whatsapp', '918220945226');
+    const question = getTxt('source-text-5-question', 'Will You Be Mine Forever?');
+
+    let noBtnText = noBase;
+    if (noCount === 1) noBtnText = getTxt('source-text-5-no-hover-1', "Wait, really? 🥺");
+    if (noCount === 2) noBtnText = getTxt('source-text-5-no-hover-2', "Please don't... 😢");
+    if (noCount === 3) noBtnText = getTxt('source-text-5-no-hover-3', "Breaks my heart... 💔");
+
+    const waLink = `https://wa.me/${waNumber}?text=${encodeURIComponent('I Love You! 💖 ' + question)}`;
 
     let html = `
-        <button onclick="window.location.href='https://wa.me/918220945226?text=I%20Love%20You%20%F0%9F%92%96'" class="w-full py-4 bg-gradient-to-r from-rose-500 to-pink-600 text-white font-bold text-xl rounded-xl shadow-lg transform transition-all hover:scale-105 hover:shadow-rose-500/50 flex items-center justify-center gap-2">
-            YES, I Will! 💖
+        <button onclick="window.location.href='${waLink}'" class="w-full py-4 bg-gradient-to-r from-rose-500 to-pink-600 text-white font-bold text-xl rounded-xl shadow-lg transform transition-all hover:scale-105 hover:shadow-rose-500/50 flex items-center justify-center gap-2">
+            ${yesText}
         </button>
     `;
 
@@ -395,9 +416,10 @@ function renderProposalButtons() {
             </button>
         `;
     } else {
+        const finalNo = getTxt('source-text-5-no-final', "Okay, I'm not letting you say no anymore! 😘");
         html += `
-            <div class="text-rose-200 text-sm font-cute animate-pulse bg-white/10 p-2 rounded-lg">
-                Okay, I'm not letting you say no anymore! 😘
+            <div class="text-rose-200 text-sm font-cute animate-pulse bg-white/10 p-2 rounded-lg text-center">
+                ${finalNo}
             </div>
         `;
     }
