@@ -315,9 +315,31 @@
 /* Glassmorphism */
 .glass-card {
     background: rgba(255, 255, 255, 0.25);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
+
+/* Specific Glow for Proposal Card */
+#proposal-card {
+    background: rgba(20, 20, 20, 0.6);
+    /* Darker for better contrast on video */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 40px rgba(244, 63, 94, 0.4), inset 0 0 20px rgba(244, 63, 94, 0.2);
+    animation: cardFloat 6s ease-in-out infinite;
+}
+
+@keyframes cardFloat {
+
+    0%,
+    100% {
+        transform: translateY(0) scale(1);
+    }
+
+    50% {
+        transform: translateY(-10px) scale(1.02);
+    }
 }
 
 /* Loading Spinner */

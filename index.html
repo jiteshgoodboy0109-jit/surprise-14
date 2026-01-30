@@ -25,9 +25,9 @@
             display: none;
         }
 
-        /* Ensure text preserves line breaks when compiled */
-        .whitespace-pre-line {
-            white-space: pre-line;
+        /* Ensure text preserves multiple spaces and line breaks */
+        .whitespace-pre-wrap {
+            white-space: pre-wrap;
         }
 
         /* Custom Scrollbar for Letter */
@@ -87,7 +87,7 @@
                 </div>
 
                 <h1 id="type-text-0"
-                    class="text-3xl md:text-5xl text-white font-serif drop-shadow-md leading-relaxed min-h-[120px] whitespace-pre-line">
+                    class="text-2xl md:text-5xl text-white font-serif drop-shadow-md leading-relaxed tracking-wide min-h-[120px] whitespace-pre-line md:whitespace-pre-wrap px-6 md:px-0 text-center">
                 </h1>
 
                 <div id="action-buttons-0" class="hidden flex-col gap-4 items-center w-full animate-pop-in mt-6">
@@ -102,8 +102,9 @@
                 </div>
             </div>
             <div id="source-text-0" style="display:none;">
-                Hey Beautiful...
-                I wrote a little story for us. 💖
+                Hey Beautie...
+                You live in my mind,
+                but not in my life.💖
             </div>
         </div>
 
@@ -121,7 +122,7 @@
                             class="w-40 h-40 rounded-full border-4 border-white shadow-lg relative z-10 object-cover bg-rose-50">
                     </div>
                     <p id="type-text-1"
-                        class="text-2xl md:text-3xl text-rose-800 font-handwriting h-24 flex items-center justify-center whitespace-pre-line">
+                        class="text-xl md:text-3xl text-rose-800 font-handwriting min-h-24 flex items-center justify-center leading-relaxed tracking-wide whitespace-pre-line md:whitespace-pre-wrap px-6 md:px-0 text-center">
                     </p>
                 </div>
                 <button id="next-btn-1" onclick="nextScene()"
@@ -156,7 +157,8 @@
                                 data-lucide="paperclip"></i></div>
                         <div
                             class="bg-rose-100 h-36 w-full flex items-center justify-center mb-2 rounded-sm relative overflow-hidden">
-                            <img src="assets/memory1.jpg" onerror="this.src='https://placehold.co/400x400?text=Photo+1'"
+                            <img id="memory-img-1" src="assets/memory1.jpg"
+                                onerror="this.src='https://placehold.co/400x400?text=Photo+1'"
                                 class="object-cover w-full h-full">
                         </div>
                         <p class="text-center font-handwriting text-xl text-gray-600">Silly Laughs</p>
@@ -168,7 +170,8 @@
                                 data-lucide="paperclip"></i></div>
                         <div
                             class="bg-blue-100 h-36 w-full flex items-center justify-center mb-2 rounded-sm relative overflow-hidden">
-                            <img src="assets/memory2.jpg" onerror="this.src='https://placehold.co/400x400?text=Photo+2'"
+                            <img id="memory-img-2" src="assets/memory2.jpg"
+                                onerror="this.src='https://placehold.co/400x400?text=Photo+2'"
                                 class="object-cover w-full h-full">
                         </div>
                         <p class="text-center font-handwriting text-xl text-gray-600">Food Dates</p>
@@ -180,7 +183,8 @@
                                 data-lucide="paperclip"></i></div>
                         <div
                             class="bg-purple-100 h-40 w-full flex items-center justify-center mb-2 rounded-sm relative overflow-hidden">
-                            <img src="assets/memory3.jpg" onerror="this.src='https://placehold.co/400x400?text=Photo+3'"
+                            <img id="memory-img-3" src="assets/memory3.jpg"
+                                onerror="this.src='https://placehold.co/400x400?text=Photo+3'"
                                 class="object-cover w-full h-full">
                         </div>
                         <p class="text-center font-handwriting text-xl text-gray-600">Just Us</p>
@@ -200,8 +204,8 @@
             <div class="flex flex-col items-center justify-center px-6 w-full h-full py-8">
                 <!-- Letter Paper Container -->
                 <div id="letter-content-area"
-                    class="bg-white w-full max-w-lg p-8 md:p-12 shadow-2xl rounded-sm relative transform rotate-1 transition hover:rotate-0 duration-500 flex flex-col items-center"
-                    style="background-image: linear-gradient(#f0f0f0 1px, transparent 1px); background-size: 100% 2em; max-height: 70vh;">
+                    class="bg-white w-full max-w-lg p-5 md:p-12 shadow-2xl rounded-sm relative transform rotate-1 transition hover:rotate-0 duration-500 flex flex-col items-center"
+                    style="background-image: linear-gradient(#f0f0f0 1px, transparent 1px); background-size: 100% 2em; max-height: 75vh;">
 
                     <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 w-24 h-6 bg-rose-200/50 -rotate-2">
                     </div>
@@ -210,7 +214,7 @@
                     <!-- Scrollable Text Area -->
                     <div class="w-full overflow-y-auto letter-scroll pr-2 relative z-10" style="max-height: 50vh;">
                         <p id="type-text-3"
-                            class="text-xl md:text-2xl text-slate-800 font-handwriting leading-loose whitespace-pre-line text-left">
+                            class="text-lg md:text-2xl text-slate-800 font-handwriting leading-loose tracking-wide whitespace-pre-line md:whitespace-pre-wrap text-left px-2">
                         </p>
                     </div>
                 </div>
@@ -235,12 +239,21 @@
 
             <div id="source-text-3" style="display:none;">
                 My dear Nila, 💕
-                En life-la nee vandha naal lendhu ellamey special-aa maariduchu ✨ En smile, en peace, en happiness —
-                ellathukum reason nee thaan 💖 Nee sirikkum podhu en heart romba fast-aa beat aagum 😍 Un voice ketta
-                mattum podhum, en worries ellam marandhudum 😌 Un kooda spend panna ovvoru moment-um enakku priceless 💎
-                En bad days-la en strength nee, en good days-la en joy nee 💕 Inimey en life full-aa un kaiya pidichu
-                nadakka aasai 🤝 Un kooda future build panna ready-aa irukken ❤️🏡 So, today with all my heart, naan
-                unna kekkuren… will you be mine forever, Nila? 💍 I love you always 😘💖
+
+                En life-la nee vandha naal lendhu ellamey special-aa maariduchu ✨
+                En smile, en peace, en happiness — ellathukum reason nee thaan 💖
+                Nee sirik kum pod hu en hea rt romba fast-aa beat aagum 😍
+                Un voice ketta mattum podhum, en worries ellam marandhudum 😌
+                Un kooda spend panna ovvoru moment-um enakku priceless 💎
+
+                En bad days-la en strength nee, en good days-la en joy nee 💕
+                Inimey en life full-aa un kaiya pidichu nadakka aasai 🤝
+                Un kooda future build panna ready-aa irukken ❤️🏡
+
+                So, today with all my heart, naan unna kekkuren…
+                will you be mine forever, Nila? 💍
+
+                I love you always 😘💖
             </div>
         </div>
 
@@ -254,7 +267,7 @@
                 <i data-lucide="moon" class="text-blue-200 w-24 h-24 mb-6 opacity-80 animate-bounce relative z-10"></i>
 
                 <h2 id="type-text-4"
-                    class="text-3xl md:text-4xl text-blue-100 font-serif mb-6 min-h-[100px] drop-shadow-lg whitespace-pre-line">
+                    class="text-3xl md:text-4xl text-blue-100 font-serif mb-6 min-h-[100px] drop-shadow-lg leading-relaxed tracking-wide whitespace-pre-line md:whitespace-pre-wrap text-center">
                 </h2>
 
                 <div class="relative mt-8">
@@ -287,20 +300,46 @@
                     Your browser does not support the video tag.
                 </video>
 
+                <!-- 
+                   UPDATED PROPOSAL CARD DESIGN
+                   Attractive design with glassmorphism, gradients, and better text.
+                -->
                 <div id="proposal-card"
-                    class="glass-card p-8 rounded-3xl border-t border-yellow-500/50 shadow-[0_0_50px_rgba(0,0,0,0.8)] max-w-md w-full absolute z-50 transform scale-0 transition-all duration-1000 mx-4 hidden bottom-10 md:bottom-auto">
+                    class="glass-card p-8 rounded-3xl border-t border-yellow-500/50 shadow-[0_0_80px_rgba(244,63,94,0.6)] max-w-md w-full absolute z-50 transform scale-0 transition-all duration-1000 mx-4 hidden bottom-10 md:bottom-auto flex flex-col items-center bg-black/40 backdrop-blur-xl border border-white/20">
+
                     <div class="mb-4 text-center">
-                        <span class="text-6xl animate-bounce">💍</span>
+                        <span
+                            class="text-7xl animate-bounce filter drop-shadow-[0_0_15px_rgba(255,255,255,0.8)]">💍</span>
                     </div>
 
-                    <h1 class="text-4xl md:text-5xl font-serif text-white mb-2 drop-shadow-md text-center">Nila...</h1>
-                    <p class="text-xl text-rose-200 mb-8 font-handwriting text-center">Will You Be Mine Forever?</p>
+                    <h1 id="final-proposal-title"
+                        class="text-5xl md:text-6xl font-serif text-transparent bg-clip-text bg-gradient-to-r from-rose-200 via-pink-200 to-rose-200 mb-4 drop-shadow-md text-center tracking-wide leading-tight whitespace-pre-line md:whitespace-pre-wrap">
+                    </h1>
+
+                    <p id="final-proposal-question"
+                        class="text-2xl text-rose-100 mb-8 font-handwriting text-center leading-relaxed drop-shadow-sm tracking-wide whitespace-pre-line md:whitespace-pre-wrap">
+                    </p>
 
                     <div id="proposal-buttons" class="flex flex-col gap-4 w-full">
                         <!-- Buttons injected via JS -->
                     </div>
                 </div>
 
+            </div>
+
+            <!-- Source Text for Scene 5 (Easily Editable) -->
+            <div id="source-text-5-title" style="display:none;">
+                Nila...
+            </div>
+            <div id="source-text-5-question" style="display:none;">
+                Will You Be Mine Forever?
+            </div>
+
+            <!-- MANUAL PHOTO LINKS (Paste your image links here) -->
+            <div id="source-media" style="display:none;">
+                <div id="source-image-1">assets/memory1.jpg</div>
+                <div id="source-image-2">assets/memory2.jpg</div>
+                <div id="source-image-3">assets/memory3.jpg</div>
             </div>
         </div>
 

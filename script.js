@@ -300,6 +300,18 @@ function renderScene() {
             }
             break;
 
+        case 2: // Memories
+            // Inject Images from Source Divs
+            ['1', '2', '3'].forEach(id => {
+                const source = document.getElementById(`source-image-${id}`);
+                const img = document.getElementById(`memory-img-${id}`);
+                if (source && img) {
+                    const url = source.innerText.trim();
+                    if (url) img.src = url;
+                }
+            });
+            break;
+
         case 3: // Letter
             const text3Element = document.getElementById('source-text-3');
             if (text3Element) {
@@ -328,6 +340,17 @@ function renderScene() {
             renderProposalButtons(); // Prepare buttons but keep hidden
             const video = document.getElementById('proposal-video');
             const card = document.getElementById('proposal-card');
+
+            // Inject Text from Source Divs
+            const titleSource = document.getElementById('source-text-5-title');
+            const questionSource = document.getElementById('source-text-5-question');
+
+            if (titleSource) {
+                document.getElementById('final-proposal-title').innerText = titleSource.innerText.trim();
+            }
+            if (questionSource) {
+                document.getElementById('final-proposal-question').innerText = questionSource.innerText.trim();
+            }
 
             if (video) {
                 video.style.pointerEvents = 'none';
