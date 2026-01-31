@@ -43,23 +43,88 @@ async function callGemini(prompt) {
 // --- Features ---
 
 function downloadLetter() {
-    const letterElement = document.getElementById('letter-content-area');
-    if (!letterElement) return;
+    const textTarget = document.getElementById('type-text-3');
+    if (!textTarget) return;
+    const fullContent = textTarget.innerText;
+
+    // 1. Create a specialized "PDF ONLY" container
+    // This is much cleaner than cloning the UI element and works perfectly on mobile & desktop
+    const printContainer = document.createElement('div');
+    printContainer.style.width = '800px';
+    printContainer.style.backgroundColor = '#fff';
+    printContainer.style.padding = '80px 70px';
+    printContainer.style.boxSizing = 'border-box';
+    printContainer.style.fontFamily = "'Dancing Script', cursive";
+    printContainer.style.minHeight = '1120px'; // A4/Letter height estimate
+
+    // 2. Add Notebook Ruler Lines
+    const lineHeight = '32pt';
+    printContainer.style.lineHeight = lineHeight;
+    printContainer.style.backgroundImage = 'linear-gradient(#f1f5f9 2px, transparent 2px)';
+    printContainer.style.backgroundSize = `100% ${lineHeight}`;
+    printContainer.style.backgroundPosition = '0 100px';
+
+    // 3. Header/Date Area
+    const header = document.createElement('div');
+    header.style.textAlign = 'right';
+    header.style.marginBottom = '40px';
+    header.style.color = '#94a3b8';
+    header.style.fontSize = '14pt';
+    header.innerText = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    printContainer.appendChild(header);
+
+    // 4. Content Area
+    const body = document.createElement('div');
+    body.style.fontSize = '21pt';
+    body.style.color = '#1e293b'; // slate-800
+    body.style.whiteSpace = 'pre-wrap';
+    body.innerText = fullContent;
+    printContainer.appendChild(body);
+
+    // 5. Feather Decoration (Clean for PDF)
+    const feather = document.createElement('div');
+    feather.style.position = 'absolute';
+    feather.style.right = '40px';
+    feather.style.bottom = '40px';
+    feather.style.opacity = '0.05';
+    feather.style.fontSize = '60pt';
+    feather.innerText = '🪶';
+    printContainer.appendChild(feather);
+
+    // Temporarily append for rendering (but hidden)
+    printContainer.style.position = 'fixed';
+    printContainer.style.top = '-9999px';
+    printContainer.style.left = '-9999px';
+    document.body.appendChild(printContainer);
 
     // Options for html2pdf
     const opt = {
-        margin: 0.5,
-        filename: 'Love_Letter_For_Nila.pdf',
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2 },
+        margin: [0.4, 0.4],
+        filename: 'Love_Letter_To_Nila.pdf',
+        image: { type: 'jpeg', quality: 1.0 },
+        html2canvas: {
+            scale: 3,
+            useCORS: true,
+            letterRendering: true,
+            width: 800,
+            logging: false
+        },
         jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
     };
 
-    // Use html2pdf library (loaded via CDN)
     if (window.html2pdf) {
-        html2pdf().set(opt).from(letterElement).save();
+        // Small timeout ensures styles are fully applied
+        setTimeout(() => {
+            html2pdf().set(opt).from(printContainer).save().then(() => {
+                document.body.removeChild(printContainer);
+            }).catch(err => {
+                console.error("PDF Error", err);
+                document.body.removeChild(printContainer);
+            });
+        }, 150);
     } else {
-        alert("PDF generator not ready yet. Please wait a moment.");
+        document.body.removeChild(printContainer);
+        alert("Preparing your letter... Please click again in a moment! ✨");
     }
 }
 
