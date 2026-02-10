@@ -532,7 +532,7 @@ function renderProposalButtons() {
     const yesText = getTxt('source-text-5-yes', 'YES, I Will! 💖');
     const noBase = getTxt('source-text-5-no', 'No...');
     const waNumber = getTxt('source-text-5-whatsapp', '918220945226');
-    const question = getTxt('source-text-5-question', 'Will You Be Mine Forever?');
+    const question = getTxt('source-text-5-question', 'My heart has already chosen you—will you choose me for always🌙?');
 
     let noBtnText = noBase;
     if (noCount === 1) noBtnText = getTxt('source-text-5-no-hover-1', "Wait, really? 🥺");
