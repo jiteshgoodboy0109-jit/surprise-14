@@ -93,7 +93,7 @@ function downloadLetter() {
     // PDF options
     const opt = {
         margin: 0.5,
-        filename: 'Love_Letter_To_Nila.pdf',
+        filename: 'Love_Letter_To_Kamalini.pdf',
         image: { type: 'jpeg', quality: 0.98 },
         html2canvas: {
             scale: 2,

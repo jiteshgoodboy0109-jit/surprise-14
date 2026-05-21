@@ -25,6 +25,11 @@
             display: none;
         }
 
+        /* Global letter spacing for all text */
+        * {
+            letter-spacing: 0.03em;
+        }
+
         /* Ensure text preserves multiple spaces and line breaks */
         .whitespace-pre-wrap {
             white-space: pre-wrap;
@@ -224,7 +229,11 @@
                 <!-- Control Buttons -->
                 <div class="flex gap-4 mt-8 animate-bounce w-full justify-center">
                     <!-- Premium 'Save as PDF' Button -->
-
+                    <button id="download-btn-3" onclick="downloadLetter()"
+                        class="hidden group px-6 py-2.5 bg-gradient-to-r from-purple-500 to-pink-600 text-white font-serif text-sm tracking-wide rounded-full shadow-[0_4px_14px_0_rgba(168,85,247,0.39)] hover:shadow-[0_6px_20px_rgba(168,85,247,0.23)] hover:scale-105 transition-all duration-300 flex items-center gap-2 border border-white/20">
+                        <span>📥 Download Letter</span>
+                        <i data-lucide="download" class="w-4 h-4 group-hover:translate-y-1 transition-transform"></i>
+                    </button>
 
                     <!-- Premium 'Turn Page' Button -->
                     <button id="next-btn-3" onclick="nextScene()"
@@ -236,7 +245,7 @@
             </div>
 
             <div id="source-text-3" style="display:none;">
-                My dear Nila, 💕
+                My dear Kamalini, 💕
 
                 En life-la nee vandha naal lendhu ellamey special-aa maariduchu ✨
                 En smile, en peace, en happiness — ellathukum reason nee thaan 💖
@@ -249,7 +258,7 @@
                 Un kooda future build panna ready-aa irukken ❤️🏡
 
                 So, today with all my heart, naan unna kekkuren…
-                will you be mine forever, Nila? 💍
+                will you be mine forever, Kamalini? 💍
 
                 I love you always 😘💖
             </div>
@@ -324,7 +333,7 @@
             </div>
 
             <!-- Source Text for Scene 5 (Easily Editable) -->
-            <div id="source-text-5-title" style="display:none;">Nila...</div>
+            <div id="source-text-5-title" style="display:none;">Kamalini...</div>
             <div id="source-text-5-question" style="display:none;">Will You Be Mine Forever?</div>
             <div id="source-text-5-yes" style="display:none;">YES, I Will! 💖</div>
             <div id="source-text-5-no" style="display:none;">No...</div>

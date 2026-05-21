@@ -2,14 +2,17 @@
 
 .font-handwriting {
     font-family: 'Dancing Script', cursive;
+    letter-spacing: 0.2em;
 }
 
 .font-serif {
     font-family: 'Playfair Display', serif;
+    letter-spacing: 0.08em;
 }
 
 .font-cute {
     font-family: 'Nunito', sans-serif;
+    letter-spacing: 0.05em;
 }
 
 /* --- Animations --- */
@@ -422,6 +425,14 @@
 /* Intro specific adjustments */
 #type-text-0 {
     text-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    letter-spacing: 0.15em;
+}
+
+/* Letter spacing for all typing text */
+#type-text-1,
+#type-text-3,
+#type-text-4 {
+    letter-spacing: 0.12em;
 }
 
 @media (max-width: 640px) {

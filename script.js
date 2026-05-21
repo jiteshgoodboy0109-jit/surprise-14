@@ -247,6 +247,10 @@ function handleNo() {
 
 function updateProgress() {
     const container = document.getElementById('progress-bar');
+    if (!container) {
+        console.warn("Progress bar container not found");
+        return;
+    }
     container.innerHTML = scenes.map((s, idx) => `
         <div class="h-2 rounded-full transition-all duration-500 shadow-sm ${idx === scene ? 'w-8 bg-white scale-110' : 'w-2 bg-white/40'}"></div>
     `).join('');
@@ -566,8 +570,22 @@ function renderProposalButtons() {
 
 // --- Initialization ---
 
-if (document.readyState === 'loading') {
-    window.addEventListener('load', init);
-} else {
+function waitForDOM() {
+    const container = document.getElementById('main-container');
+    const content = document.getElementById('content');
+    
+    if (!container || !content) {
+        console.log("Waiting for DOM elements...");
+        setTimeout(waitForDOM, 50);
+        return;
+    }
+    
+    console.log("DOM ready, initializing app...");
     init();
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', waitForDOM);
+} else {
+    waitForDOM();
 }
